@@ -3,7 +3,7 @@ const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
 const static = require('koa-static');
-const {v4: uuid} = require('uuid');
+const { v4: uuid } = require('uuid');
 const cors = require('@koa/cors')
 const { routeList } = require('./controllers/routeList');
 const { getRide } = require('./controllers/getride');
@@ -13,16 +13,19 @@ const { changeRide } = require('./controllers/changeride');
 const { delRide } = require('./controllers/delride');
 const { delRoute } = require('./controllers/delroute');
 const { login } = require('./controllers/login');
-const Session = require('./models/Session')
-
-app.use(static(path.join(__dirname, 'public')))
-app.use(cors());
-app.use(bodyParser());
-
+const Session = require('./models/Session');
 const Router = require('koa-router');
 const mustBeAuthenticated = require('./libs/mustBeAuthenticated');
 const { getClient } = require('./controllers/getclient');
-const router = new Router({ prefix: '/api' });
+
+app.use(cors());
+app.use(bodyParser());
+app.use(static(path.join(__dirname, 'public')));
+// app.use(async (ctx) => {
+//     const index = path.join(__dirname, '/public', 'index.html');
+//     ctx.sendFile(index);
+// });
+
 
 // содание токена
 app.use((ctx, next) => {
@@ -50,14 +53,16 @@ app.use(async (ctx, next) => {
     }
 });
 
+const router = new Router({ prefix: '/api' });
+
 router.use(async (ctx, next) => {
     const header = ctx.request.get('Authorization');
     if (!header) return next();
-    
+
     const token = header.split(' ')[1];
     // .replace(/"/g, '');
     if (!token) return next();
-    
+
     const session = await Session.findOne({ token }).populate('user');
     if (!session) {
         ctx.throw(401, 'Неверный аутентификационный токен');
@@ -87,6 +92,16 @@ router.delete('/delride', mustBeAuthenticated, delRide);
 router.delete('/delroute', mustBeAuthenticated, delRoute);
 
 app.use(router.routes());
+
+// this for HTML5 history in browser
+const fs = require('node:fs');
+const index = fs.readFileSync(path.join(__dirname, 'public/index.html'));
+app.use(async (ctx, next) => {
+    if (!ctx.url.startsWith('/api')) {
+        ctx.set('content-type', 'text/html');
+        ctx.body = index;
+    }
+});
 
 app.listen(5000, () => {
     console.log('create server');
