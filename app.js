@@ -8,7 +8,7 @@ const cors = require('@koa/cors')
 const { routeList } = require('./controllers/routeList');
 const { getRide } = require('./controllers/getride');
 const { addRoute } = require('./controllers/addroute');
-const { addRide } = require('./controllers/addRide');
+const { addRide } = require('./controllers/addride');
 const { changeRide } = require('./controllers/changeride');
 const { delRide } = require('./controllers/delride');
 const { delRoute } = require('./controllers/delroute');
@@ -18,14 +18,9 @@ const Router = require('koa-router');
 const mustBeAuthenticated = require('./libs/mustBeAuthenticated');
 const { getClient } = require('./controllers/getclient');
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser());
 app.use(static(path.join(__dirname, 'public')));
-// app.use(async (ctx) => {
-//     const index = path.join(__dirname, '/public', 'index.html');
-//     ctx.sendFile(index);
-// });
-
 
 // содание токена
 app.use((ctx, next) => {
