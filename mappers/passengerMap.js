@@ -9,10 +9,24 @@ module.exports.passengerMap = function passengerMap(ride) {
     }))
 }
 
-module.exports.returnClientPassengerMap = function returnClientPassengerMap(ride) {
+module.exports.clientByPhoneMap = function clientByPhoneMap(client) {
     return {
-        name: ride.name,
-        phone: ride.phone,
+        name: client.name,
+        phone: client.phone,
         position: ''
+    }
+}
+
+module.exports.passengersDBmap = function passengersDBmap(page) {
+    const content = page.docs.map((client) => ({
+        id: client.id,
+        name: client.name,
+        phone: client.phone,
+        ride: client.ride
+    }))
+    return {
+        content,
+        totalPages: page.totalPages,
+        page
     }
 }

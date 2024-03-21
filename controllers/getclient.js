@@ -1,4 +1,4 @@
-const { returnClientPassengerMap } = require('../mappers/passengerMap');
+const { clientByPhoneMap } = require('../mappers/passengerMap');
 const Client = require('../models/Client');
 
 module.exports.getClient = async function getClient(ctx, next) {
@@ -9,6 +9,6 @@ module.exports.getClient = async function getClient(ctx, next) {
         // ctx.throw(404, "dont find client");
         ctx.body = {message: 'dont client'};
     } else {
-        ctx.body = returnClientPassengerMap(client);
+        ctx.body = clientByPhoneMap(client);
     }
 }

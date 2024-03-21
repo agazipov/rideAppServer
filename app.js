@@ -13,14 +13,15 @@ const { changeRide } = require('./controllers/changeride');
 const { delRide } = require('./controllers/delride');
 const { delRoute } = require('./controllers/delroute');
 const { login } = require('./controllers/login');
+const { getClient } = require('./controllers/getclient');
+const { clients } = require('./controllers/clients');
 const Session = require('./models/Session');
 const Router = require('koa-router');
 const mustBeAuthenticated = require('./libs/mustBeAuthenticated');
-const { getClient } = require('./controllers/getclient');
 
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser());
-app.use(static(path.join(__dirname, 'public')));
+// app.use(static(path.join(__dirname, 'public')));
 
 // содание токена
 app.use((ctx, next) => {
@@ -73,6 +74,7 @@ router.get('/data', routeList);
 
 // вилка в гетрейд на различные респонсы в зависимости от токена
 router.post('/ride', getRide);
+router.post('/clients', mustBeAuthenticated, clients);
 router.post('/getclient', mustBeAuthenticated, getClient);
 
 // не создавать новый токен при повторном
