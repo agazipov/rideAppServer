@@ -74,7 +74,7 @@ router.get('/data', routeList);
 
 // вилка в гетрейд на различные респонсы в зависимости от токена
 router.post('/ride', getRide);
-router.post('/clients', mustBeAuthenticated, clients);
+router.get('/clients', mustBeAuthenticated, clients);
 router.post('/getclient', mustBeAuthenticated, getClient);
 
 // не создавать новый токен при повторном

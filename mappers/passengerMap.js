@@ -27,6 +27,8 @@ module.exports.passengersDBmap = function passengersDBmap(page) {
     return {
         content,
         totalPages: page.totalPages,
-        page
+        page: page.page,
+        prevPage: page.prevPage,
+        nextPage: page.nextPage
     }
 }
