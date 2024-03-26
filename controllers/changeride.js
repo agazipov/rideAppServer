@@ -8,16 +8,18 @@ module.exports.changeRide = async function changeRide(ctx, next) {
     const requestChangeRide = ctx.request.body;
 
     const passengers = passengerMap(requestChangeRide);
+    console.log('passenger: ', passengers);
 
-    if (passengers) {
+    if (passengers.length !== 0) {
         for (const item of passengers) {
-            const client = await Client.findOne({phone: item.phone})
-            if (!client) {
+            // const client = await Client.findOne({phone: item.phone});
+            if (!item.isFind) {
                 const newClient = new Client(item);
                 newClient.ride.push(requestChangeRide.id);
                 await newClient.save();
             }
         }
+        console.log('complite');
     }
 
     const ride = await Ride.replaceOne({_id: requestChangeRide.id}, rideMap(requestChangeRide));

@@ -3,6 +3,7 @@ const Client = require('../models/Client');
 
 module.exports.getClient = async function getClient(ctx, next) {
     const clientRequest = ctx.request.body;
+    console.log("requset", clientRequest);
     const client = await Client.findOne({ phone: clientRequest.phone });
     if (!client) {
         // ctx.status = 204;

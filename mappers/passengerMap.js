@@ -1,11 +1,9 @@
 module.exports.passengerMap = function passengerMap(ride) {
-    if (ride.passengers.length === 0) null;
-
     return ride.passengers.filter((passenger) => passenger.name !== '').map((passenger) => ({
         name: passenger.name,
         phone: passenger.phone,
+        isFind: passenger.isFind,
         route: ride.route,
-        position: ride.position,
     }))
 }
 

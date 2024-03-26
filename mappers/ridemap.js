@@ -1,10 +1,16 @@
 module.exports.rideMap = function rideMap(ride) {
+    const passenger = ride.passengers.map((client) => {
+        delete client.isFind;
+        return client;
+    });
+    console.log('client', passenger);
+
     return {
         id: ride._id,
         time: ride.time,
         car: ride.car,
         driver: ride.driver,
-        passengers: ride.passengers,
+        passengers: passenger,
         route: ride.route,
     }
 }
