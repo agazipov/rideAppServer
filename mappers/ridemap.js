@@ -3,7 +3,6 @@ module.exports.rideMap = function rideMap(ride) {
         delete client.isFind;
         return client;
     });
-    console.log('client', passenger);
 
     return {
         id: ride._id,

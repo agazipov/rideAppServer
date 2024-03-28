@@ -8,7 +8,6 @@ module.exports.changeRide = async function changeRide(ctx, next) {
     const requestChangeRide = ctx.request.body;
 
     const passengers = passengerMap(requestChangeRide);
-    console.log('passenger: ', passengers);
 
     if (passengers.length !== 0) {
         for (const item of passengers) {
