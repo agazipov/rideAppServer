@@ -21,7 +21,8 @@ module.exports.addRide = async function addRide(ctx, next) {
 
     await ride.save();
 
-    await Route.findByIdAndUpdate(requestAddRide.route, {$inc: {seats: requestAddRide.freeSeats}})
+    // добавить исключение, что-бы не делать лишний запрос когда данные не менялись
+    await Route.findByIdAndUpdate(requestAddRide.route, {$inc: {seats: requestAddRide.freeSeats}});
 
     ctx.body = ride;
 }

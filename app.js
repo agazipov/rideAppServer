@@ -100,6 +100,4 @@ app.use(async (ctx, next) => {
     }
 });
 
-app.listen(5000, () => {
-    console.log('create server');
-});
+module.exports = app;

@@ -4,7 +4,7 @@ const { passengersDBmap } = require("../mappers/passengerMap");
 module.exports.clients = async function clients(ctx, next) {
     let option = {
         page: ctx.query.page,
-        limit: 2,
+        limit: 10,
     };
 
     const result = await Client.paginate({}, option);

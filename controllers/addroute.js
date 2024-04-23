@@ -14,12 +14,12 @@ module.exports.addRoute = async function addRoute(ctx, next) {
         if (valueForm.title === 'Бак-Чел') {
             for (const iterator of defaultRide_1) {
                 const newRide = {...iterator, route: route.id};
-                const ride = await Ride.create(rideMap(newRide));
+                await Ride.create(rideMap(newRide));
             }
         } else {
             for (const iterator of defaultRide_2) {
                 const newRide = {...iterator, route: route.id};
-                const ride = await Ride.create(rideMap(newRide));
+                await Ride.create(rideMap(newRide));
             }
         }
         route.seats = 8;
