@@ -10,5 +10,6 @@ module.exports = {
   newAdmin: {
     NAME: process.argv[2],
     PASSWORD: process.argv[3],
-  }
+  },
+  MOCK: process.env.MOCK || 'false'
 };

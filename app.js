@@ -18,6 +18,11 @@ const { clients } = require('./controllers/clients');
 const Session = require('./models/Session');
 const Router = require('koa-router');
 const mustBeAuthenticated = require('./libs/mustBeAuthenticated');
+const { job } = require('./cron/dbSimulited/cronMocks');
+const config = require('./config/config');
+const mockGate = require('./libs/mockGate');
+
+config.MOCK === 'true' && job.start();
 
 app.use(cors());
 app.use(bodyParser());
@@ -70,7 +75,7 @@ router.use(async (ctx, next) => {
     return next();
 });
 
-router.get('/data', routeList);
+router.get('/data', mockGate, routeList);
 
 // вилка в гетрейд на различные респонсы в зависимости от токена
 router.post('/ride', getRide);
@@ -91,13 +96,13 @@ router.delete('/delroute', mustBeAuthenticated, delRoute);
 app.use(router.routes());
 
 // this for HTML5 history in browser
-const fs = require('node:fs');
-const index = fs.readFileSync(path.join(__dirname, 'public/index.html'));
-app.use(async (ctx, next) => {
-    if (!ctx.url.startsWith('/api')) {
-        ctx.set('content-type', 'text/html');
-        ctx.body = index;
-    }
-});
+// const fs = require('node:fs');
+// const index = fs.readFileSync(path.join(__dirname, 'public/index.html'));
+// app.use(async (ctx, next) => {
+//     if (!ctx.url.startsWith('/api')) {
+//         ctx.set('content-type', 'text/html');
+//         ctx.body = index;
+//     }
+// });
 
 module.exports = app;
