@@ -55,4 +55,5 @@ adminSchema.methods.checkPassword = async function(password) {
   return hash === this.passwordHash;
 };
 
-module.exports = connection.model('Admin', adminSchema);
+module.exports = mongoose.model('Admin', adminSchema);
+// module.exports = connection.model('Admin', adminSchema);

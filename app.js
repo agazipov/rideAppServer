@@ -22,7 +22,7 @@ const { job } = require('./cron/dbSimulited/cronMocks');
 const config = require('./config/config');
 const mockGate = require('./libs/mockGate');
 
-config.MOCK === 'true' && job.start(), console.log('mockActivated');
+config.MOCK === 'true' && (job.start(), console.log('mockActivated'));
 
 app.use(cors());
 app.use(bodyParser());

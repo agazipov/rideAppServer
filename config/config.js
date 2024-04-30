@@ -1,6 +1,6 @@
 module.exports = {
   mongodb: {
-    uri: 'mongodb://127.0.0.1:27017/rideDB',
+    uri: 'm',
   },
   crypto: {
     iterations: 12000,

@@ -18,4 +18,5 @@ const routeSchema = new mongoose.Schema({
     }
 });
 
-module.exports = connection.model('Route', routeSchema);
+module.exports = mongoose.model('Route', routeSchema);
+// module.exports = connection.model('Route', routeSchema);

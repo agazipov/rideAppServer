@@ -23,4 +23,5 @@ const rideSchema = new mongoose.Schema({
     },
 });
 
-module.exports = connection.model('Ride', rideSchema);
+module.exports = mongoose.model('Ride', rideSchema);
+// module.exports = connection.model('Ride', rideSchema);

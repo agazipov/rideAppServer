@@ -31,4 +31,5 @@ const clientSchema = new mongoose.Schema({
 
 clientSchema.plugin(mongoosePagination);
 
-module.exports = connection.model('Client', clientSchema);
+module.exports = mongoose.model('Client', clientSchema);
+// module.exports = connection.model('Client', clientSchema);

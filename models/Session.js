@@ -20,4 +20,5 @@ const schema = new mongoose.Schema({
 
 schema.path('lastVisit').index({expires: '7d'});
 
-module.exports = connection.model('Session', schema);
+module.exports = mongoose.model('Session', schema);
+// module.exports = connection.model('Session', schema);
