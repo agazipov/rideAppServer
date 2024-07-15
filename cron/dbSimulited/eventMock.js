@@ -1,7 +1,8 @@
 module.exports.EventMocks = class EventMocks {
-    seats = Math.floor(Math.random() * 8);
+    // seats = Math.floor(Math.random() * 8);
 
     constructor(iteration) {
+        this.seats = 0;
         this.id = iteration;
         this.start = this.nextDate(iteration);
         this.title = iteration % 2 === 1 ? 'Бакал-Челябинск' : 'Челябинск-Бакал';
