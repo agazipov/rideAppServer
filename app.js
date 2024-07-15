@@ -78,7 +78,7 @@ router.use(async (ctx, next) => {
 router.get('/data', mockGate, routeList);
 
 // вилка в гетрейд на различные респонсы в зависимости от токена
-router.post('/ride', getRide);
+router.post('/ride', mockGate, getRide);
 router.get('/clients', mustBeAuthenticated, clients);
 router.post('/getclient', mustBeAuthenticated, getClient);
 

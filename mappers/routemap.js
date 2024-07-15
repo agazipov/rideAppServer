@@ -17,3 +17,11 @@ module.exports.routerMapClient = function routerMapClient(route) {
         date: route.start,
     }
 }
+
+// парсит замоканые данные
+module.exports.routerMapServerMocks = function routerMapServerMocks(route) {
+    return {
+        ...route,
+        start: route.start.slice(0, 10),
+    }
+}
