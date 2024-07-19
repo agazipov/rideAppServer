@@ -11,7 +11,7 @@ module.exports.EventMocks = class EventMocks {
     nextDate(daySkip) {
         let roundingDay = Math.ceil(daySkip / 2);
         const cuurentDate = new Date();
-        return new Date(cuurentDate.setDate(cuurentDate.getDate() + roundingDay - 1));
+        return new Date(cuurentDate.setDate(cuurentDate.getDate() + roundingDay));
     }
 }
 
